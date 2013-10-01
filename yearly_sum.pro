@@ -10,7 +10,7 @@ lon = -179.95+indgen(nlon)*0.1
 lat = -89.95 +indgen(nlat)*0.1
 
 name = ['HebeiN','HebeiS','Liaoning','Shandong','Hebei']
-For area_ID=0,3 do begin
+For area_ID=2,4 do begin
 case area_ID of
 0: select=[0]
 1: select=[1]
@@ -45,7 +45,7 @@ sample_traj = fltarr(nlon,nlat)
     ;sample_traj_m is used to sample number of trajector data in one month
     sample_traj_m = fltarr(nlon,nlat)
 
-    filename = '/home/liufei/Data/Bay/Result/'+string(hour_num,format='(i2.2)')+'h/v1/'+name_select+Yr2+mon2+'.nc'
+    filename = '/home/liufei/Data/Bay/Result/'+string(hour_num,format='(i2.2)')+'h/v2/'+name_select+Yr2+mon2+'.nc'
     fid=NCDF_OPEN(filename)
     varid1=NCDF_VARID(fid,'Num_Traj')
     NCDF_VARGET, fid, varid1, sample_traj_m
@@ -65,7 +65,7 @@ sample_traj = fltarr(nlon,nlat)
   density[where(month_num gt 0U)]=density[where(month_num gt 0U)]/month_num[where(month_num gt 0U)]
   density[where(month_num le 0U)]=-999
 
-  Out_nc_file='/home/liufei/Data/Bay/Result/'+string(hour_num,format='(i2.2)')+'h/v1/'+name_select+Yr2+'.nc'
+  Out_nc_file='/home/liufei/Data/Bay/Result/'+string(hour_num,format='(i2.2)')+'h/v2/'+name_select+Yr2+'.nc'
   FileId = NCDF_Create( Out_nc_file, /Clobber )
   NCDF_Control, FileID, /NoFill
   xID   = NCDF_DimDef( FileID, 'X', nlon )

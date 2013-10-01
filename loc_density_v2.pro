@@ -389,7 +389,11 @@ sample_traj = fltarr(point_num)
     print,name_select,':number of trajector sample in ', Yr2+Mon2, total(sample_traj_m)
     print,name_select,':number of satellite sample in ', Yr2+Mon2, total(sample_m)
     ;print,density_m
-    summary[*,month-month_start] =[total(sample_traj_m),total(sample_m),mean(density_m[where(density_m gt 0U)]) ]
+    if array_equal(where(density_m gt 0U),[-1]) then begin
+    	summary[*,month-month_start] =[total(sample_traj_m),total(sample_m),0]
+    endif else begin
+    	summary[*,month-month_start] =[total(sample_traj_m),total(sample_m),mean(density_m[where(density_m gt 0U)]) ]
+    endelse
     
     ;output sample_traj_m, sample_m, density_m and convert them to global map
     month1=fltarr(nlon,nlat)
